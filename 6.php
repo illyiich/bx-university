@@ -13,7 +13,7 @@
 function main (array $arguments)
 {
 //	unset($arguments[0]); //выбрасывают 1 аргумент
-	array_shift($arguments);
+	array_shift($arguments); //Удаляет первый элемент массива ($arguments), представляющий имя файла скрипта
 
 	$command = array_shift($arguments); // альтернатива, сдвигает массив, выбрасывает 1-й элемент, команда встает на 1-е место по 0-му ключу
 
@@ -47,38 +47,38 @@ function main (array $arguments)
 
 function addCommand(array $arguments)
 {
-	$title = array_shift($arguments); //Заголовок - 1-й элемент
+	$title = array_shift($arguments); //Заголовок - 1-й элемент. Извлекает и удаляет название задачи из аргументов
 
 	$todo = [
 		'id' => uniqid(),
 		'title' => $title,
 		'completed' => false,
 		'created_at' => time(), //текущее время
-		'updated_at ' => null,
-		'completed_at ' => null,
+		'updated_at ' => null, // Время последнего обновления
+		'completed_at ' => null, // Время завершения, если задача выполнена
 	];
 
 //	$serializedString = serialize($todo); //строковое представление todo
 //
 //	var_dump(unserialize($serializedString)); // Обратно в представление в виде массива
 
-	$fileName = date('Y-m-d') . 'txt';
+	$fileName = date('Y-m-d') . 'txt'; // Создаёт имя файла на основе текущей даты
 	$filePath = __DIR__ . '/data/' . $fileName; //Текущая директория + папка data + fileName. Абсолютный путь к файлу
 
 	if (file_exists($filePath)) //Проверка на существование
 	{
 		$content = file_get_contents($filePath); //Содержимое файла
 		$todos = unserialize($content, [ //Преобразуем в массив, небезопасно
-			'allowed_classes' => false,  //Для безопасности
+			'allowed_classes' => false,  //Для безопасности. Только безопасные типы данных
 		]);
-		$todos[] = $todo; //Добавили todo в todos
+		$todos[] = $todo; //Добавили todo в todos. Добавляет новую задачу в массив
 		file_put_contents($filePath, serialize($todos)); //serialize - генерирует пригодное для хранения представление переменной
 	}
 	else
 	{
-		$todos = [ $todo ];
+		$todos = [ $todo ]; // Если файла нет, создаёт новый массив с добавленной задачей
 
-		file_put_contents($filePath, serialize($todos));
+		file_put_contents($filePath, serialize($todos)); // Сохраняет массив в новый файл
 	}
 
 	file_put_contents($filePath, $title . "\n", FILE_APPEND); //Добавили title в файл по адресу filePath. Используется дозапись вместо перезаписи
@@ -110,7 +110,7 @@ function removeCommand(array $arguments)
 
 	foreach ($arguments as $num) //Каждый аргумент как номер
 	{
-		$index = (int)$num - 1;
+		$index = (int)$num - 1; // Преобразует номер задачи в индекс массива
 
 		if (!isset($todos[$index])) // проверка, что по индексу что-то есть
 		{
@@ -118,12 +118,12 @@ function removeCommand(array $arguments)
 			continue;
 		}
 
-		unset($todos[$index]);
+		unset($todos[$index]); // Удаляет задачу по индексу
 	}
 
-	$todos = array_values($todos);
+	$todos = array_values($todos); // Сбрасывает индексы массива
 
-	file_put_contents($filePath, serialize($todos));
+	file_put_contents($filePath, serialize($todos)); // Сохраняет изменения
 }
 
 function doneCommand(array $arguments) //php 6.php done 2
