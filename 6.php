@@ -8,6 +8,7 @@
 // php 6.php done 1 2 [x]
 // php 6.php undone 1 2 [ ]
 // php 6.php remove 2 (rm)
+// php 6.php report
 
 require_once __DIR__ . '/boot.php';
 
