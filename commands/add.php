@@ -13,31 +13,10 @@ function addCommand(array $arguments)
 		'completed_at ' => null, // Время завершения, если задача выполнена
 	];
 
-//	$serializedString = serialize($todo); //строковое представление todo
-//
-//	var_dump(unserialize($serializedString)); // Обратно в представление в виде массива
 
-//	$fileName = date('Y-m-d') . 'txt'; // Создаёт имя файла на основе текущей даты
-//	$filePath = ROOT . '/data/' . $fileName; //Текущая директория + папка data + fileName. Абсолютный путь к файлу
-//
-//	if (file_exists($filePath)) //Проверка на существование
-//	{
-//		$content = file_get_contents($filePath); //Содержимое файла
+	$todos = getTodos();
+	$todos[] = $todo; //Добавили todo в todos. Добавляет новую задачу в массив
 
-		$todos = unserialize($content, [ //Преобразуем в массив, небезопасно
-			'allowed_classes' => false,  //Для безопасности. Только безопасные типы данных
-		]);
-		$todos[] = $todo; //Добавили todo в todos. Добавляет новую задачу в массив
-		file_put_contents($filePath, serialize($todos)); //serialize - генерирует пригодное для хранения представление переменной
-	}
-	else
-	{
-		$todos = [ $todo ]; // Если файла нет, создаёт новый массив с добавленной задачей
+	storeTodos($todos);
 
-		file_put_contents($filePath, serialize($todos)); // Сохраняет массив в новый файл
-	}
-
-	file_put_contents($filePath, $title . "\n", FILE_APPEND); //Добавили title в файл по адресу filePath. Используется дозапись вместо перезаписи
-
-	var_dump($filePath);
 }

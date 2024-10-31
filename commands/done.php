@@ -2,25 +2,7 @@
 
 function doneCommand(array $arguments) //php 6.php done 2
 {
-	$fileName = date('Y-m-d') . 'txt';
-	$filePath = ROOT . '/data/' . $fileName; //Текущая директория + папка data + fileName. Абсолютный путь к файлу
-
-	if (!file_exists($filePath))
-	{
-		echo "Nothing to do here";
-		return;
-	}
-
-	$content = file_get_contents(($filePath)); //Содержимое файла
-	$todos = unserialize($content, [ //Преобразуем в массив, небезопасно
-		'allowed_classes' => false,  //Для безопасности
-	]);
-
-	if (empty($todos)) //Если массив пустой
-	{
-		echo "Nothing to do here";
-		return;
-	}
+	$todos = getTodosOrFail();
 
 	$now = time();
 
@@ -39,5 +21,5 @@ function doneCommand(array $arguments) //php 6.php done 2
 		]);
 	}
 
-	file_put_contents($filePath, serialize($todos));
+	storeTodos($todos);
 }
