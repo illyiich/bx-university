@@ -18,5 +18,4 @@ function addCommand(array $arguments)
 	$todos[] = $todo; //Добавили todo в todos. Добавляет новую задачу в массив
 
 	storeTodos($todos);
-
 }
