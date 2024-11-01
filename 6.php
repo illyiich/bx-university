@@ -38,6 +38,9 @@ function main (array $arguments)
 		case "rm":
 			removeCommand($arguments);
 			break;
+		case "report":
+			reportCommand($arguments);
+			break;
 		default:
 			echo "Unknown command";
 			exit(1); //Код ошибки

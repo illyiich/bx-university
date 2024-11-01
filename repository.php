@@ -42,7 +42,7 @@ function getRepositoryPath(?int $time): string
 {
 	$time = $time ?? time();
 
-	$fileName = date('Y-m-d', $time) . 'txt';
+	$fileName = date('Y-m-d', $time) . '.txt';
 	return ROOT . '/data/' . $fileName; //Текущая директория + папка data + fileName. Абсолютный путь к файлу
 }
 
