@@ -8,6 +8,29 @@ require_once  __DIR__ . '/../boot.php';
 $time = null;
 $isHistory = false;
 $title = 'Todoist';
+$errors = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    $title = trim($_POST['title']);
+
+    $title = strip_tags($title); //Без тегов
+
+    if (strlen($title) > 0)
+    {
+        $todo = createTodo($title);
+
+        addTodo($todo);
+
+        redirect('/?saved=true');
+    }
+    else
+    {
+        $errors[] = 'Task cannot be empty';
+    }
+
+//    header('location: /');
+}
 
 if (isset($_GET['date']))
 {
@@ -25,11 +48,13 @@ if (isset($_GET['date']))
     }
 }
 
+
 echo view('Layout', [
     'title' => $title,
     'content' => view('pages/index', [
         'todos' => getTodos($time),
         'isHistory' => $isHistory,
+        'errors' => $errors,
     ]),
 ]);
 

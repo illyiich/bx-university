@@ -10,8 +10,8 @@
             type="checkbox"
             <?= ($todo['completed']) ? 'checked' : ''; ?>
             <?= ($isHistory) ? 'disabled' : ''; ?>
-                disabled
         >
-        <?= $todo['title']; ?>
+        <?= safe($todo['title']); ?>  <!--Защита от XSS-->
     </label>
 </article>
+

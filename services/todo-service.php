@@ -1,5 +1,16 @@
 <?php
 
+function createTodo(string $title): array
+{
+    return [
+        'id' => uniqid(),
+        'title' => $title,
+        'completed' => false,
+        'created_at' => time(), //текущее время
+        'updated_at ' => null, // Время последнего обновления
+        'completed_at ' => null, // Время завершения, если задача выполнена
+    ];
+}
 function mapTodos(array $todos, array $positions, Closure $callback): array
 {
     foreach ($positions as $position) //Каждый аргумент как номер

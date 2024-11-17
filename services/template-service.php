@@ -31,5 +31,9 @@ function view(string $path, array $variables = []) : string
     require $absolutePath; //Подключили файл шаблона
 
     return ob_get_clean();
+}
 
+function safe($value): string
+{
+    return htmlspecialchars($value, ENT_QUOTES);
 }
