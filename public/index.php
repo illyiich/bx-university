@@ -19,9 +19,12 @@
 
             <?php
 
-            require_once  __DIR__ . '/../boot.php'
+            require_once  __DIR__ . '/../boot.php';
 
+            $todos = getTodos();
 
+            foreach ($todos as $todo)
+            {
 
 
 
@@ -29,16 +32,24 @@
 
             <article class="todo">
                 <label>
-                    <input type="checkbox" checked>
-                    My todo 1
+                    <input type="checkbox" <?php
+                        if ($todo['completed'])
+                        {
+                            echo "checked";
+                        }
+
+                    ?>>
+                    <?php
+                        echo $todo['title']
+
+                    ?>
                 </label>
             </article>
-            <article class="todo">
-                <label>
-                    <input type="checkbox" checked>
-                    My todo 2
-                </label>
-            </article>
+
+            <?php
+            }
+            ?>
+
 
             <form action="/" method="post" class="add-todo">
                 <input type="text" placeholder="What to do?">
