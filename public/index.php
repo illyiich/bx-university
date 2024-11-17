@@ -2,10 +2,9 @@
 
 require_once  __DIR__ . '/../boot.php';
 
-$title = "Todoist";
-$todos = getTodos();
-
-echo view('pages/index', [
-        'title' => $title,
-        'todos' => $todos,
+echo view('Layout', [
+    'title' => 'Todoist',
+    'content' => view('pages/index', [
+        'todos' => getTodos(),
+    ]),
 ]);

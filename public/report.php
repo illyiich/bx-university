@@ -2,8 +2,6 @@
 
 require_once  __DIR__ . '/../boot.php';
 
-$title = 'Todoist :: Report';
-
 $allTodos = prepareReportData();
 
 //	var_dump($allTodos);
@@ -47,9 +45,11 @@ $report = [
 
 ];
 
-echo view('pages/report', [
-    'title' => $title,
-    'report' => $report,
+echo view('Layout', [
+    'title' => 'Todoist :: Report',
+    'content' => view('pages/report', [
+        'report' => $report,
+    ]),
 ]);
 
 
