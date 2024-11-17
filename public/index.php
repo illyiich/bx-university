@@ -1,10 +1,43 @@
 <?php
+// php -S localhost:8000 -t public
+// php -S localhost:8000
+//http://localhost:8000/?date=2024-11-01 - за прошлую дату
 
 require_once  __DIR__ . '/../boot.php';
 
+$time = null;
+$isHistory = false;
+$title = 'Todoist';
+
+if (isset($_GET['date']))
+{
+    $time = strtotime($_GET['date']);
+    if ($time === false)
+    {
+        $time = time();
+    }
+
+    $today = date('Y-m-d');
+    if ($today !== date('Y-m-d', $time))
+    {
+        $isHistory = true;
+        $title = sprintf('Todoist :: %s', date('j M', $time));
+    }
+}
+
 echo view('Layout', [
-    'title' => 'Todoist',
+    'title' => $title,
     'content' => view('pages/index', [
-        'todos' => getTodos(),
+        'todos' => getTodos($time),
+        'isHistory' => $isHistory,
     ]),
 ]);
+
+//                HTTP - запросы
+//var_dump($_REQUEST); // request = get + post + cookie
+//
+//var_dump($_COOKIE); die;
+//
+//$_SERVER
+//    $_GET
+//        $_POST
