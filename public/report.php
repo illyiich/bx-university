@@ -3,49 +3,53 @@
 require_once  __DIR__ . '/../boot.php';
 
 $title = 'Todoist :: Report';
-$todos = getTodos();
 
-?>
+$allTodos = prepareReportData();
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/style.css">
-    <title><?= $title; ?></title>
-</head>
-<body>
-<section class="content">
-    <header>
-        <span class="icon">📝</span>
-        <h1><?= $title; ?></h1>
-    </header>
+//	var_dump($allTodos);
+$totalDays = count($allTodos);
 
-    <main>
+$totalTasksCount = array_reduce($allTodos, function ($prev, $todos) {
+    return $prev + count($todos);
 
-        <?php foreach ($todos as $todo): ?>
-            <article class="todo">
-                <label>
-                    <input type="checkbox" <?= ($todo['completed']) ? 'checked' : ''; ?>>
-                    <?= $todo['title']; ?>
-                </label>
-            </article>
-        <?php endforeach; ?>
+}, 0);
 
-        <form action="/" method="post" class="add-todo">
-            <input type="text" placeholder="What to do?">
-            <button type="submit">Save</button>
-        </form>
-    </main>
+$totalCompletedTasksCount = array_reduce($allTodos, function ($prev, $todos) {
+    $completed = array_filter($todos, fn($todo) => $todo['completed']);
 
-    <footer>
-        &copy; <?= date('Y'); ?> Todoist by Bitrix University
-    </footer>
+    return $prev + count($completed);
 
-</section>
+}, 0);
 
-</body>
-</html>
+$dailyTaskCounts = array_map(function ($todos) {
+    return count($todos);
+}, $allTodos);
+
+$maxTasksCount = max($dailyTaskCounts);
+$minTasksCount = min($dailyTaskCounts);
+
+$averageTasksCount = 0;
+$averageCompletedTasksCount = 0;
+if ($totalDays > 0)
+{
+    $averageTasksCount = floor($totalTasksCount / $totalDays);
+    $averageCompletedTasksCount = floor($totalCompletedTasksCount / $totalDays);
+}
+
+$report = [
+    "Total days: $totalDays",
+    "Total tasks: $totalTasksCount",
+    "Total completed tasks: $totalCompletedTasksCount",
+    "Max tasks in a day: $maxTasksCount",
+    "Min tasks in a day: $minTasksCount",
+    "Average tasks in a day: $averageTasksCount",
+    "Average completed tasks per day: $averageCompletedTasksCount",
+
+];
+
+echo view('pages/report', [
+    'title' => $title,
+    'report' => $report,
+]);
+
+

@@ -1,6 +1,6 @@
 <?php
 
-function doneCommand(array $arguments) //php 6.php done 2
+function doneCommand(array $arguments) //php todo.php done 2
 {
 	$todos = getTodosOrFail();
 

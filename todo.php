@@ -1,14 +1,14 @@
 <?php
 
-// php 6.php list
-// php 6.php list 2022-10-12
-// php 6.php list yesterday
-// php 6.php add "Wake up"
-// php 6.php add "Drink coffee"
-// php 6.php done 1 2 [x]
-// php 6.php undone 1 2 [ ]
-// php 6.php remove 2 (rm)
-// php 6.php report
+// php todo.php list
+// php todo.php list 2022-10-12
+// php todo.php list yesterday
+// php todo.php add "Wake up"
+// php todo.php add "Drink coffee"
+// php todo.php done 1 2 [x]
+// php todo.php undone 1 2 [ ]
+// php todo.php remove 2 (rm)
+// php todo.php report
 
 require_once __DIR__ . '/boot.php';
 

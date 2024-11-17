@@ -11,6 +11,10 @@ body {
     font-size: 18px;
 }
 
+p {
+    margin-bottom: 16px;
+}
+
 .content {
     display: flex;
     flex-direction: column;
