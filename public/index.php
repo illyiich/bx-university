@@ -7,7 +7,7 @@ require_once  __DIR__ . '/../boot.php';
 
 $time = null;
 $isHistory = false;
-$title = 'Todoist';
+$title = option('APP_NAME', 'Todoist');
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -55,6 +55,7 @@ echo view('Layout', [
         'todos' => getTodos($time),
         'isHistory' => $isHistory,
         'errors' => $errors,
+//        'truncateTodo' => $config['TRUNCATE_TODO'] ?? null,
     ]),
 ]);
 

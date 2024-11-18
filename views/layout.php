@@ -6,7 +6,7 @@
  */
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="<?= option('APP_LANG','en'); ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -26,7 +26,7 @@
 
     <footer>
         <div>
-        &copy; <?= date('Y'); ?> Todoist by Bitrix University
+        &copy; <?= date('Y'); ?> <?= $title; ?> by Bitrix University
         </div>
         <?= view('components/menu', ['items' => $bottomMenu]); ?>
     </footer>
