@@ -47,10 +47,7 @@ $report = [
 
 echo view('Layout', [
     'title' => 'Todoist :: Report',
-    'bottomMenu' => [
-        ['url' => '/', 'text' => 'Today'],
-        ['url' => '/report.php', 'text' => 'Reporting'],
-    ],
+    'bottomMenu' => require_once ROOT . '/menu.php',
     'content' => view('pages/report', [
         'report' => $report,
     ]),

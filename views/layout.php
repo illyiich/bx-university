@@ -18,13 +18,11 @@
 <body>
 <section class="content">
     <header>
-        <span class="icon">📝</span>
+        <a href="/" class="icon">📝</a>  <!--При клике на иконку возвращаемся на главную -->
         <h1><?= $title; ?></h1>
     </header>
 
     <?= $content ?>  <!--Контент динамический, рендерится с помощью views/pages-->
-
-
 
     <footer>
         <div>

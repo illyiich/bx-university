@@ -48,13 +48,9 @@ if (isset($_GET['date']))
     }
 }
 
-
 echo view('Layout', [
     'title' => $title,
-    'bottomMenu' => [
-        ['url' => '/', 'text' => 'Today'],
-        ['url' => '/report.php', 'text' => 'Reporting'],
-    ],
+    'bottomMenu' => require_once ROOT . '/menu.php',
     'content' => view('pages/index', [
         'todos' => getTodos($time),
         'isHistory' => $isHistory,

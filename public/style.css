@@ -36,6 +36,7 @@ header h1 {
 header .icon {
     font-size: 48px;
     margin-right: 6px;
+    text-decoration: none;
 }
 
 main {
