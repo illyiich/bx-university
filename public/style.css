@@ -78,6 +78,18 @@ button {
 footer {
     font-size: 14px;
     color: #a3a3a3;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer nav a {
+    color: inherit;
+    padding: 0 4px;
+}
+
+footer nav a.is-active {
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .alert {

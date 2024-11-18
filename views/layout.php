@@ -2,6 +2,7 @@
 /**
  * @var string $title
  * @var string $content
+ * @var array $bottomMenu
  */
 ?>
 <!doctype html>
@@ -21,12 +22,15 @@
         <h1><?= $title; ?></h1>
     </header>
 
-    <?= $content ?>
+    <?= $content ?>  <!--Контент динамический, рендерится с помощью views/pages-->
 
 
 
     <footer>
+        <div>
         &copy; <?= date('Y'); ?> Todoist by Bitrix University
+        </div>
+        <?= view('components/menu', ['items' => $bottomMenu]); ?>
     </footer>
 
 </section>

@@ -51,6 +51,10 @@ if (isset($_GET['date']))
 
 echo view('Layout', [
     'title' => $title,
+    'bottomMenu' => [
+        ['url' => '/', 'text' => 'Today'],
+        ['url' => '/report.php', 'text' => 'Reporting'],
+    ],
     'content' => view('pages/index', [
         'todos' => getTodos($time),
         'isHistory' => $isHistory,
