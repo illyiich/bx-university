@@ -3,6 +3,8 @@
 // php -S localhost:8000
 //http://localhost:8000/?date=2024-11-01 - за прошлую дату
 
+// Этот файл - точка входа
+
 require_once  __DIR__ . '/../boot.php';
 
 $time = null;
@@ -18,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     if (strlen($title) > 0)
     {
-        $todo = createTodo($title);
+        $todo = new Todo($title);
 
-        addTodo($todo);
+        saveTodo($todo);
 
         redirect('/?saved=true');
     }
@@ -47,6 +49,8 @@ if (isset($_GET['date']))
         $title = sprintf('Todoist :: %s', date('j M', $time));
     }
 }
+
+
 
 echo view('Layout', [
     'title' => $title,
